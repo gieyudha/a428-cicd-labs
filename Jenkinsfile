@@ -7,14 +7,6 @@ node {
             sh './jenkins/scripts/test.sh'
         }
     }
-    // withDockerContainer(args: '-p 3007:3007', image: 'node:16-buster-slim'){
-    //     stage('Build') { 
-    //         sh 'npm install' 
-    //     }
-    //     stage('Test') {
-    //         sh './jenkins/scripts/test.sh'
-    //     }
-    // }
 }
 // pipeline {
 //     agent {
