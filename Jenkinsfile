@@ -22,10 +22,8 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                sh "docker exec -it quirky_ardinghelli bash"
                 sh "rm -rf /var/www/jenkins-react-app"
-                sh "exit"
-                sh "docker cp -r ${WORKSPACE}/build/ quirky_ardinghelli:/var/www/jenkins-react-app/"
+                sh "cp -r ${WORKSPACE}/build/ quirky_ardinghelli:/var/www/jenkins-react-app/"
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
