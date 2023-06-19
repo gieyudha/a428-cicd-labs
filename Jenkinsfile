@@ -21,9 +21,9 @@ pipeline {
         }
         stage('Deliver') {
             steps {
+                sh './jenkins/scripts/deliver.sh'
                 sh "rm -rf /var/www/jenkins-react-app"
                 sh "cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
-                sh './jenkins/scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
