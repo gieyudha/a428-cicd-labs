@@ -3,7 +3,8 @@ node {
     env.CI = 'true'
     docker.image('node:16-buster-slim').inside('-p 3008:3008') {
         stage('Build') { 
-            sh 'npm install' 
+            sh 'npm install'
+            sh 'sudo npm run build'
         }
         stage('Test') {
             sh './jenkins/scripts/test.sh'
@@ -13,6 +14,8 @@ node {
         }
         stage('Deploy') {
             sh './jenkins/scripts/deliver.sh' 
+            sh "sudo rm -rf /var/www/jenkins-react-app"
+            sh "sudo cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
             input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
             sh './jenkins/scripts/kill.sh' 
             sleep(time: 1, unit: "MINUTES")
