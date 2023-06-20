@@ -1,9 +1,13 @@
 node {
-    stage('Build') { 
-       sh 'npm install'
+    stage('Build') {
+       nodejs(nodeJSInstallationName: 'node') {
+          sh 'npm install'
+       }
     }
     stage('Test') {
-       sh './jenkins/scripts/test.sh'
+       nodejs(nodeJSInstallationName: 'Node-name') {
+          sh './jenkins/scripts/test.sh'
+       }
     }
     stage('Build Image') {
        withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
