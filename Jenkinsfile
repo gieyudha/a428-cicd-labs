@@ -11,8 +11,8 @@ node {
             input message: 'Lanjutkan ke tahap Deploy?'
         }
         stage('Deploy') {
-            sh "rm -rf /var/www/jenkins-react-app"
-            sh "cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
+            //sh "rm -rf /var/www/jenkins-react-app"
+           // sh "cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
             sh './jenkins/scripts/deliver.sh' 
             input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
             sleep(time: 1, unit: "MINUTES")
