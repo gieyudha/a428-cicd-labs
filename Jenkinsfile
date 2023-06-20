@@ -21,10 +21,10 @@ node {
     }
     stage('Deploy') {
        script {
-          def dockerCmd = 'docker run --name react-app -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
           sshagent(['ec2-server-key']) {
-                   sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35 ${dockerCmd}"
+                   sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35"
            }
+          sh 'docker run --name react-app -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
        }
        sleep(time: 1, unit: "MINUTES")
    }
