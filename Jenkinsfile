@@ -5,7 +5,7 @@ node {
        }
     }
     stage('Test') {
-       nodejs(nodeJSInstallationName: 'Node-name') {
+       nodejs(nodeJSInstallationName: 'node') {
           sh './jenkins/scripts/test.sh'
        }
     }
