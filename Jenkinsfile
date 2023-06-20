@@ -32,7 +32,7 @@ pipeline {
             steps {
                script {
                     def dockerCmd = 'docker run -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
-                    sshagent(['react_key']) {
+                    sshagent(['ec2-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35 ${dockerCmd}"
                     }
                 }
