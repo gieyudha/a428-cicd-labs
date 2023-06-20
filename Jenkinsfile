@@ -28,11 +28,11 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
                script {
                     def dockerCmd = 'docker run  -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
-                    sshagent(['ec2-server-key']) {
+                    sshagent(['react_key']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35 ${dockerCmd}"
                     }
                 }
