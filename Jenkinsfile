@@ -5,11 +5,6 @@ pipeline {
             args '-p 3000:3000'
         }
     }
-    parameters {
-        choice(name:'VERSION', choices:['1.0', '1.1', '1.2'], description:'Choose the version of the project')
-
-        booleanParam(name :'executeTests', description:'Execute the tests', defaultValue:false)
-    }
     environment {
         CI = 'true'
     }
