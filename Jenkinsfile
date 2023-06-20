@@ -3,11 +3,6 @@ pipeline {
     tools {
         nodejs "node"
     }
-    parameters {
-        choice(name:'VERSION', choices:['1.0', '1.1', '1.2'], description:'Choose the version of the project')
-
-        booleanParam(name :'executeTests', description:'Execute the tests', defaultValue:false)
-    }
     stages {
         stage('Build') {
             steps {
@@ -31,7 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                script {
-                    def dockerCmd = 'docker run -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
+                    def dockerCmd = 'docker run --name react-app -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
                     sshagent(['ec2-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35 ${dockerCmd}"
                     }
