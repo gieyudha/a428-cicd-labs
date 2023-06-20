@@ -22,7 +22,7 @@ node {
     stage('Deploy') {
        script {
           sshagent(['ec2-server-key']) {
-                   sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35"
+                   sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35 ./check-container"
            }
           sh 'docker run --name react-app -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
        }
