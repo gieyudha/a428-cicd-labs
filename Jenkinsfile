@@ -30,15 +30,13 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                script {
+               script {
                     def dockerCmd = 'docker run  -p 3000:3000 -d gieyudha/react-app-dicoding:latest'
                     sshagent(['ec2-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@3.1.81.35 ${dockerCmd}"
                     }
                 }
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
             }
         }
     }
